@@ -14,7 +14,7 @@ function setupAudio(){
 }
 
 function setupStream(stream) {
-    let audioContent = new AudioContext();
+    let audioContent = new (window.AudioContext || window.webkitAudioContext)();
     let audioStream = audioContent.createMediaStreamSource( stream );
     let analyser = audioContent.createAnalyser();
     audioStream.connect(analyser);
@@ -31,7 +31,7 @@ function setupStream(stream) {
         const decibels = 20 * Math.log10(amplitude || 1);
 
         console.log("Decibels:", decibels);
-        if (decibels >= 35) {
+        if (decibels >= 15) {
             const annee = document.querySelectorAll("letter")[3];
             const canvas = document.getElementById("bonne");
             const bonane = document.querySelector("#change");
