@@ -22,7 +22,9 @@ function setupStream(stream) {
 
     const bufferLength = analyser.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
-
+    let req;
+    let count = 0
+    let count3 = 0
     function updateDecibelLevel() {
         analyser.getByteFrequencyData(dataArray);
 
@@ -30,19 +32,27 @@ function setupStream(stream) {
 
         const decibels = 20 * Math.log10(amplitude || 1);
 
-        console.log("Decibels:", decibels);
-        if (decibels >= 15) {
+
+        console.log('gfgbq');
+        if (decibels >= 25) {
             const annee = document.querySelectorAll("letter")[3];
             const canvas = document.getElementById("bonne");
             const bonane = document.querySelector("#change");
-            bonane.innerHTML = "Bonne année"
+            const milatsaka = document.getElementById("milatsaka");
+            bonane.innerHTML = "Bonne année";
             canvas.offsetHeight;
-            canvas.style.transition = "visibility 1s ease"
             canvas.style.visibility = "visible"
-            console.log(annee);
-            annee.innerHTML = "4";
+          
+            milatsaka.classList.add('fall');
+            setTimeout(() => {
+                const letterContent = document.querySelectorAll(".letter-content")[3];
+                letterContent.innerHTML = 4;
+                milatsaka.classList.add("rise");
+            },1500);
+
+            console.log(milatsaka);
         } else {
-            requestAnimationFrame(updateDecibelLevel);
+            req = requestAnimationFrame(updateDecibelLevel);
         }
     }
     updateDecibelLevel();
